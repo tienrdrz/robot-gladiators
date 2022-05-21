@@ -15,10 +15,23 @@ var enemyAttack = 12;
 
 var fight = function(enemyName) {
   //repeat and execute as long as enemy is alive
-  while(enemyHealth > 0) {
+  while(playerHealth > 0 && enemyHealth > 0) {
 
     var promptFight = window.prompt ("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-  // if player choses to fight, then fight
+  //if player picks skip
+  if (promptFight === "skip" || promptFight === "SKIP")  {
+    //confirm skip
+    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+    // if yes, leave
+    if (confirmSkip) {
+      window.alert(playerName + " has decided to skip this fight. Goodbye!");
+      //subtract money
+      playerMoney = playerMoney - 10;
+      console.log("playerMoney", playerMoney)
+      break;
+    }
+  }
+    // if player choses to fight, then fight
 if (promptFight === "fight" || promptFight === "FIGHT") {
   // remove enemy's health by subtracting the amount set in the playerAttack variable
   enemyHealth = enemyHealth - playerAttack;
@@ -28,7 +41,9 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
 
   // check enemy's health
   if (enemyHealth <= 0) {
+
     window.alert(enemyName + " has died!");
+    break;
   } else {
     window.alert(enemyName + " still has " + enemyHealth + " health left.");
   }
@@ -42,6 +57,7 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
   // check player's health
   if (playerHealth <= 0) {
     window.alert(playerName + " has died!");
+    break;
   } else {
     window.alert(playerName + " still has " + playerHealth + " health left.");
   }
@@ -50,16 +66,18 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
   //confrim skip
 var confirmSkip = window.confirm("Are you sure you want to quit?");
 
-//if yes, leave
-if (confirmSkip) {
-  window.alert( playerName + " has decided to skip this fight. Goodbye!");
-  //subtract money
-  playerMoney = playerMoney - 2;
-}
-//if no, run fight
- else {
-   fight();
- }
+// //if yes, leave
+// if (confirmSkip) {
+//   window.alert( playerName + " has decided to skip this fight. Goodbye!");
+//   //subtract money
+//   playerMoney = playerMoney - 10;
+//   console.log("playerMoney", playerMoney);
+//   break;
+// }
+// //if no, run fight
+//  else {
+//    fight();
+//  }
 }
 }
 
